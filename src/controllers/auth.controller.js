@@ -24,7 +24,7 @@ export async function register(req, res, next) {
 
     await createUser(newUser);
 
-    res.send("register successful");
+    res.json({ message: "register successful" });
   } catch (error) {
     next(error);
   }
@@ -51,7 +51,7 @@ export async function login(req, res, next) {
     });
     const { password: pw, createdAt, updatedAt, ...userData } = foundUser;
     res.json({
-      message: "Login controllers",
+      message: "Login successfully",
       token: token,
       user: userData,
     });

@@ -14,3 +14,16 @@ export const getHabitByCategory = async (categoryId) => {
     },
   });
 };
+
+export const getAllCategories = async () => {
+  return await prisma.category.findMany({
+    orderBy: {
+      id: "asc",
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+    },
+  });
+};

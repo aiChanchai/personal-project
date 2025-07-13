@@ -53,7 +53,7 @@ export async function updateUserController(req, res, next) {
 
     res.json(updatedUser);
   } catch (error) {
-    next();
+    next(error);
   }
 }
 export async function deleteUserController(req, res, next) {

@@ -5,8 +5,15 @@ import errorMiddleware from "./middlewares/error.middleware.js";
 import habitRoute from "./routes/habits.route.js";
 import adminRoute from "./routes/admin.route.js";
 import categoryRoute from "./routes/category.route.js";
+import cors from "cors";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use(express.json());
 

@@ -46,7 +46,7 @@ model Habit {
   category    Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId  Int?
   description String?
-  weeklyGoal  Int
+  weeklyGoal  Int?
   createdAt   DateTime     @default(now())
   entries     HabitEntry[]
 }
