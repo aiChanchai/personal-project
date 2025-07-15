@@ -110,6 +110,8 @@ export const searchUserByEmail = async (searchTerm) => {
       id: true,
       name: true,
       email: true,
+      role: true,
+      createdAt: true,
     },
   });
 };
