@@ -2,6 +2,7 @@ import {
   createCategory,
   deleteCategory,
   deleteUser,
+  getAllCategories,
   getAllUsers,
   getCategoryById,
   getUserById,
@@ -127,15 +128,24 @@ export async function deleteCategoryController(req, res, next) {
 
 export async function searchUserByEmailController(req, res, next) {
   try {
-    const { q } = req.query;
-    if (!q) {
+    const { email } = req.query;
+    if (!email) {
       return res.status(400).json({ message: "Query required" });
     }
 
-    const lowerCased = q.toLowerCase();
+    const lowerCased = email.toLowerCase();
 
     const users = await searchUserByEmail(lowerCased);
     res.json(users);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getAllCategoriesController(req, res, next) {
+  try {
+    const categories = await getAllCategories();
+    res.json(categories);
   } catch (error) {
     next(error);
   }

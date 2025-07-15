@@ -1,7 +1,10 @@
 import {
   createHabit,
+  createOrUpdateHabitEntry,
   deleteHabit,
+  deleteTodayHabitEntry,
   getHabitById,
+  getHabitEntries,
   getHabitsByUserId,
   updateHabit,
 } from "../services/habit.service.js";
@@ -9,13 +12,14 @@ import createError from "../utils/create-error.util.js";
 
 export async function createHabitController(req, res, next) {
   try {
-    const { title, description, weeklyGoal } = req.body;
+    const { title, description, weeklyGoal, categoryId } = req.body;
 
     const newHabit = {
       title,
       description,
       weeklyGoal,
       userId: req.user.id,
+      categoryId,
     };
 
     await createHabit(newHabit);
@@ -82,6 +86,36 @@ export async function deleteHabitController(req, res, next) {
     await deleteHabit(habitId);
 
     res.json({ message: "habit deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function createHabitEntryController(req, res, next) {
+  try {
+    const { habitId } = req.params;
+    const entry = await createOrUpdateHabitEntry(parseInt(habitId));
+    res.status(201).json(entry);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getHabitEntriesController(req, res, next) {
+  try {
+    const { habitId } = req.params;
+    const entries = await getHabitEntries(parseInt(habitId));
+    res.json(entries);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteTodayHabitEntryController(req, res, next) {
+  try {
+    const { habitId } = req.params;
+    const deleteHabitEntry = await deleteTodayHabitEntry(parseInt(habitId));
+    res.json(deleteHabitEntry);
   } catch (error) {
     next(error);
   }

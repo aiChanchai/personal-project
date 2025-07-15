@@ -27,4 +27,19 @@ habitRoute.patch(
 
 habitRoute.delete("/:id", authenticate, habitController.deleteHabitController);
 
+habitRoute.get(
+  "/:habitId/entries",
+  authenticate,
+  habitController.getHabitEntriesController
+);
+habitRoute.post(
+  "/:habitId/entries",
+  habitController.createHabitEntryController
+);
+
+habitRoute.delete(
+  "/:habitId/entries",
+  habitController.deleteTodayHabitEntryController
+);
+
 export default habitRoute;

@@ -113,3 +113,16 @@ export const searchUserByEmail = async (searchTerm) => {
     },
   });
 };
+
+export const getAllCategories = async () => {
+  return await prisma.category.findMany({
+    orderBy: {
+      id: "asc",
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+    },
+  });
+};

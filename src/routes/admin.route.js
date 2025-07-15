@@ -65,4 +65,10 @@ adminRoute.get(
   adminController.searchUserByEmailController
 );
 
+adminRoute.get(
+  "/categories",
+  authenticate,
+  adminController.getAllCategoriesController
+);
+
 export default adminRoute;
